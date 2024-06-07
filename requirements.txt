@@ -1,0 +1,11 @@
+fastapi
+pydantic
+uvicorn
+scrapy
+mongoengine
+openai
+celery
+redis
+python-dotenv
+pyjwt
+pytest
