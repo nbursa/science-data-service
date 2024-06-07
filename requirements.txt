@@ -1,6 +1,7 @@
 fastapi
 pydantic
 uvicorn
+pymongo
 scrapy
 mongoengine
 openai
@@ -9,3 +10,4 @@ redis
 python-dotenv
 pyjwt
 pytest
+requests

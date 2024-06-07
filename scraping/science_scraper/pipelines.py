@@ -5,9 +5,14 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from pymongo import MongoClient
+from app.config import settings
 
+class MongoPipeline:
+    def __init__(self):
+        self.client = MongoClient(settings.MONGODB_URI)
+        self.db = self.client["science-data-cluster"]
 
-class ScienceScraperPipeline:
     def process_item(self, item, spider):
+        self.db.articles.insert_one(dict(item))
         return item
