@@ -27,7 +27,6 @@ app.include_router(statistics.router, prefix="/api/statistics", tags=["statistic
 @app.get("/test-db-connection")
 def test_db_connection():
     try:
-        # Check the connection by running a simple command
         db.command("ping")
         return {"message": "Database connection successful"}
     except Exception as e:

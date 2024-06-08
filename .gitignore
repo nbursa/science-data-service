@@ -161,3 +161,4 @@ cython_debug/
 #.idea/
 
 celerybeat-schedule.db
+run_translate_task.py

@@ -15,7 +15,7 @@ class ScienceSpider(scrapy.Spider):
     article_counts = {}
 
     def parse(self, response):
-        category = response.url.split('/')[-1]  # Extract the category from the URL
+        category = response.url.split('/')[-1]
         if category not in self.article_counts:
             self.article_counts[category] = 0
 
@@ -31,7 +31,7 @@ class ScienceSpider(scrapy.Spider):
 
         for article_link in article_selectors:
             if self.article_counts[category] >= 10:
-                break  # Stop processing after 10 articles
+                break  # Limit reached
 
             article_url = article_link.get()
             if article_url:

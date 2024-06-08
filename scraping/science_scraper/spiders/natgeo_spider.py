@@ -1,6 +1,7 @@
 import scrapy
 from ..items import NatGeoItem
 
+
 class NatGeoSpider(scrapy.Spider):
     name = "natgeo_spider"
     start_urls = [
@@ -67,6 +68,6 @@ class NatGeoSpider(scrapy.Spider):
             self.log(f"Missing published_at on page: {response.url}")
             item['published_at'] = 'No publication date found'
 
-        item['category'] = response.url.split('/')[4]  # Extract the category from the URL
+        item['category'] = response.url.split('/')[4]
 
         yield item
