@@ -1,19 +1,28 @@
 from fastapi import FastAPI
 from pymongo import MongoClient
 from app.config import settings
-from app.routers import articles, auth, comments
+from app.routers import articles, auth, comments, statistics
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# Create the MongoClient instance
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 client = MongoClient(settings.MONGODB_URI)
 
-# Select the database
 db = client["science-data-cluster"]
 
-app.include_router(auth.router, prefix="/auth", tags=["auth"])
-app.include_router(articles.router, prefix="/articles", tags=["articles"])
-app.include_router(comments.router, prefix="/comments", tags=["comments"])
+app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
+app.include_router(articles.router, prefix="/api/articles", tags=["articles"])
+app.include_router(comments.router, prefix="/api/comments", tags=["comments"])
+app.include_router(statistics.router, prefix="/api/statistics", tags=["statistics"])
+
 
 @app.get("/test-db-connection")
 def test_db_connection():

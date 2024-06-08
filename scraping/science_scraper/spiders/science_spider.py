@@ -1,6 +1,7 @@
 import scrapy
 from ..items import ArticleItem
 
+
 class ScienceSpider(scrapy.Spider):
     name = "science_spider"
     start_urls = [
@@ -75,10 +76,10 @@ class ScienceSpider(scrapy.Spider):
             item['published_at'] = None
             self.log(f"Missing published_at on page: {response.url}")
 
-        item['image_urls'] = response.css('figure img::attr(src)').getall()  # Get all image URLs
+        item['image_urls'] = response.css('figure img::attr(src)').getall()
         if not item['image_urls']:
             self.log(f"Missing image URLs on page: {response.url}")
 
-        item['category'] = category  # Add the category to the item
+        item['category'] = category
 
         yield item

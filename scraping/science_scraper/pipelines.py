@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from app.config import settings
 
+
 class MongoPipeline:
     def __init__(self):
         self.client = MongoClient(settings.MONGODB_URI)

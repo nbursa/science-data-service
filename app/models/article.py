@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
 
+
 class Article(BaseModel):
     id: Optional[str] = Field(None, alias="_id")
     title: str
