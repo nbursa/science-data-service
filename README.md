@@ -16,3 +16,26 @@ A content aggregation and social engagement platform focused on science articles
 - Python 3.8+
 - MongoDB
 - Node.js
+
+
+
+#### run uvicorn server
+```bash
+uvicorn app.main:app --reload
+```
+
+#### start celery worker
+```bash
+celery -A scraping.celery_tasks worker --loglevel=info
+```
+
+#### start celery beat
+```bash
+celery -A scraping.celery_tasks beat --loglevel=info
+```
+
+#### scrape articles
+```bash
+python -m scrapy crawl science_spider
+```
+
