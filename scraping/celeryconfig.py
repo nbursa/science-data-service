@@ -1,7 +1,8 @@
 from celery.schedules import crontab
+from app.config import settings
 
-broker_url = 'redis://localhost:6379/0'
-result_backend = 'redis://localhost:6379/0'
+broker_url = settings.CELERY_BROKER_URL
+result_backend = settings.CELERY_RESULT_BACKEND
 
 task_serializer = 'json'
 accept_content = ['json']
@@ -10,12 +11,12 @@ timezone = 'Europe/Belgrade'
 enable_utc = True
 
 beat_schedule = {
-    'run-spider-every-minute': {
+    'run-spider-every-hour': {
         'task': 'scraping.celery_tasks.run_spider',
-        'schedule': crontab(minute='*/1'),  # every minute
+        'schedule': crontab(minute='0'),  # at the beginning of every hour
     },
-    'translate-articles-every-minute': {
-        'task': 'scraping.celery_tasks.translate_articles',
-        'schedule': crontab(minute='*/1'),  # every minute
-    },
+    # 'translate-articles-every-hour': {
+    #     'task': 'scraping.celery_tasks.translate_articles',
+    #     'schedule': crontab(minute='0'),  # at the beginning of every hour
+    # },
 }
