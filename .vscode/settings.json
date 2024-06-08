@@ -1,0 +1,9 @@
+{
+  "python.pythonPath": "path_to_your_python_interpreter",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false
+}
