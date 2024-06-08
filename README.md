@@ -1,6 +1,8 @@
 # Science Data Service - A Science News Aggregator
 
-A content aggregation and social engagement platform focused on science articles.
+⚠️ Work in progress. 
+
+A content aggregation and social engagement platform focused on science articles. 
 
 ## Features
 
@@ -80,5 +82,3 @@ Make sure to set the necessary environment variables for connecting to MongoDB a
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
-
----
