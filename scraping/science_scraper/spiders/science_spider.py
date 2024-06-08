@@ -56,9 +56,9 @@ class ScienceSpider(scrapy.Spider):
         else:
             self.log(f"Missing title on page: {response.url}")
 
-        content = response.css('div[class^="single__body"] div[class^="single__content"] p::text, div[class^="single__body"] div[class^="single__content"] p a::text').getall()
+        content = response.css('div[class^="single__body"] div[class^="single__content"]').get()
         if content:
-            item['content'] = " ".join(content).strip()
+            item['content'] = content.strip()
         else:
             self.log(f"Missing content on page: {response.url}")
 
