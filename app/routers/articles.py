@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 client = MongoClient(settings.MONGODB_URI)
 db = client["science-data-cluster"]
 
+
 class ArticleModel(BaseModel):
     id: Optional[str] = Field(alias="_id")
     title: str = "Untitled"
@@ -49,6 +50,7 @@ def get_collection(category: str) -> Collection:
         raise HTTPException(status_code=404, detail="Category not found")
     return db[category]
 
+
 @router.get("/{category}", response_description="List all articles in a category", response_model=List[ArticleModel])
 def list_articles(category: str, skip: int = Query(0), limit: int = Query(4)):
     try:
@@ -60,6 +62,7 @@ def list_articles(category: str, skip: int = Query(0), limit: int = Query(4)):
     except Exception as e:
         logger.error(f"Error fetching articles for category {category}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.get("/{category}/{article_id}", response_description="Get a single article by ID", response_model=ArticleModel)
 def get_article(category: str, article_id: str):
@@ -73,6 +76,7 @@ def get_article(category: str, article_id: str):
         logger.error(f"Error fetching article {article_id} for category {category}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @router.post("/{category}", response_description="Add new article", response_model=ArticleModel)
 def add_article(category: str, article: ArticleModel):
     try:
@@ -82,6 +86,7 @@ def add_article(category: str, article: ArticleModel):
         return article
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.put("/{category}/{article_id}", response_description="Update an article", response_model=ArticleModel)
 def update_article(category: str, article_id: str, article: ArticleModel):
@@ -94,6 +99,7 @@ def update_article(category: str, article_id: str, article: ArticleModel):
         return article
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.delete("/{category}/{article_id}", response_description="Delete an article")
 def delete_article(category: str, article_id: str):
